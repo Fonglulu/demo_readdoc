@@ -2,3 +2,6 @@ Background
 ==
 
 .. _history:
+
+History
+-------

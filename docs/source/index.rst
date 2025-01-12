@@ -1,7 +1,7 @@
 Welcome to Lumache's documentation!
 ===================================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
+**MPI** MPI stands for Message Passing Interface
 that creates recipes mixing random ingredients.
 It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
 and offers a *simple* and *intuitive* API.
@@ -17,7 +17,8 @@ Contents
 --------
 
 .. toctree::
+
     background
 
    .. usage
-   api
+   .. api
