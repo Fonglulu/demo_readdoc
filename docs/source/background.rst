@@ -1,4 +1,4 @@
-Usage
+Background
 ==
 
 .. _history:

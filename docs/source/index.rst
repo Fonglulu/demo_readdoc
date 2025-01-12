@@ -17,6 +17,7 @@ Contents
 --------
 
 .. toctree::
-   background
-   usage
+    background
+
+   .. usage
    api
