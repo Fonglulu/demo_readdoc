@@ -3,7 +3,7 @@ Introduction to MPI
 .. admonition:: Overview
    :class: Overview
 
-    * **Tutorial:** 20 min
+    * **Tutorial:** 3 hours
 
         **Objectives:**
             #. Learn what is MPI
@@ -28,7 +28,6 @@ Contents
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
    
    background
 
