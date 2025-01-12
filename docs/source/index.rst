@@ -1,4 +1,4 @@
-Welcome to Lumache's documentation!
+Introduction to MPI 
 ===================================
 
 **MPI** MPI stands for Message Passing Interface
@@ -17,6 +17,7 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 2
    :caption: Contents:
    
    background
