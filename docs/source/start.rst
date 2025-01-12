@@ -33,3 +33,5 @@ To load the Intel Compiler (LLVM-based), use:
 .. code-block:: bash
 
     module load intel-compiler-llvm/[version]
+
+Once you have loaded the appropriate modules, you can compile your MPI code using the appropriate compiler wrapper. For example, to compile a C code using OpenMPI, use:
