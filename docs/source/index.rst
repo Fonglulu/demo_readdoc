@@ -17,8 +17,9 @@ Contents
 --------
 
 .. toctree::
-
-    background
+   :caption: Contents:
+   
+   background
 
    .. usage
    .. api
