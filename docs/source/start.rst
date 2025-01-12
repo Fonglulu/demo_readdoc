@@ -1,7 +1,7 @@
 Getting Started
-==
+===
 
-.. _history:
+.. _getting-started:
 
-History
+Getting Started
 -------
