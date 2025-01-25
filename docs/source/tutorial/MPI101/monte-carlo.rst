@@ -28,7 +28,9 @@ A serial implementation of the Monte Carlo method to approximate Pi may look lik
     }
 
 
-**Parallel Monte Carlo Pi Approximation:** To parallelize the Monte Carlo method, we can divide the work among multiple processors. Each processor generates a subset of the total random samples and counts the number of samples that fall within the unit circle. The final approximation of Pi is obtained by summing the counts from all processors and dividing by the total number of samples.
+**Parallel Monte Carlo Pi Approximation:** To parallelise the Monte Carlo method, we can divide the work among multiple processors. Each processor generates a subset of the total random samples and counts the number of samples that fall within the unit circle. The final approximation of Pi is obtained by summing the counts from all processors and dividing by the total number of samples. 
+
+Our first MPI code will look like this:
 
 .. code-block:: c
     :linenos:
@@ -37,16 +39,19 @@ A serial implementation of the Monte Carlo method to approximate Pi may look lik
 
     int rank, size;
     int count=0, count_tot=0;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-    int start = rank * N /size;
-    int end = (rank+1) * N /size;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank); // get the rank of the process
+    MPI_Comm_size(MPI_COMM_WORLD, &size); // get the total number of processes
+
+    int start = rank * N /size; // the start index of the samples for this process
+    int end = (rank+1) * N /size; // the end index of the samples for this process
 
     for (i=start; i<end; i++) {
         x = (double)rand_r(&seed)/(double)RAND_MAX; 
         y = (double)rand_r(&seed)/(double)RAND_MAX;
 
         if (x*x + y*y <= 1.0) count++; 
+
+        // sum the counts from all processes        
         MPI_Reduce(*count, &count_tot, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
     }
 
