@@ -30,6 +30,5 @@ Contents
    :maxdepth: 2
    
    start
+   MPI101
 
-   .. usage
-   .. api
