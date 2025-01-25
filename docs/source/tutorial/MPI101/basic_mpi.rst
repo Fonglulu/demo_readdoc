@@ -29,3 +29,10 @@ MPI can be very easy to use. If your code only needs simple communication patter
     .. code-block:: c
 
         int MPI_Init(int &argc, char &argv)
+
+
+.. note::
+    
+    #. The MPI_Init() call does not create a process; rather, it initialises the MPI environment, e.g. defines the initial communicator MPI_WORLD_COMM.
+    
+    #. It must be called before any other MPI function.
