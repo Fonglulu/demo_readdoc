@@ -15,12 +15,13 @@ In this example, we generate :math:`N` random sampling points within a square, a
 .. image:: ../../figures/Monte-Carlo01.jpg
 
 A serial implementation of the Monte Carlo method to approximate Pi may look like the following:
+
 .. code-block:: c
     :linenos:
 
-    seed = 1; /* seed for random number generator */
+    seed = 1; // seed for random number generator 
     for (i=0; i<N; i++) {
-        x = (double)rand_r(&seed)/(double)RAND_MAX; /* RAND_MAX to normalise */
+        x = (double)rand_r(&seed)/(double)RAND_MAX; // RAND_MAX to normalise 
         y = (double)rand_r(&seed)/(double)RAND_MAX;
 
         
@@ -53,4 +54,6 @@ A serial implementation of the Monte Carlo method to approximate Pi may look lik
 
 .. note::
     The user organises the copies of data for each parallel process.
+
+In 
 
