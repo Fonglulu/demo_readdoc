@@ -24,9 +24,7 @@ A serial implementation of the Monte Carlo method to approximate Pi may look lik
         x = (double)rand_r(&seed)/(double)RAND_MAX; // RAND_MAX to normalise 
         y = (double)rand_r(&seed)/(double)RAND_MAX;
 
-        
         if (x*x + y*y <= 1.0) h++; 
-
     }
 
 
