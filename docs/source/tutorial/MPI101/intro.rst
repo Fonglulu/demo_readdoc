@@ -16,7 +16,7 @@ We see in both cases, it requires the ability to scale the number of processors 
 
 To achieve the scaling mentioned above, MPI provides the following for the programmer:
 
-.. keypoint::
+.. note::
     MPI provides a standard interface for parallel programming that includes:
         1. a communication libraries;
         2. datatypes;
