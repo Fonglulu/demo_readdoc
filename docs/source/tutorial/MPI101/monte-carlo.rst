@@ -30,3 +30,27 @@ A serial implementation of the Monte Carlo method to approximate Pi may look lik
 
 
 **Parallel Monte Carlo Pi Approximation:** To parallelize the Monte Carlo method, we can divide the work among multiple processors. Each processor generates a subset of the total random samples and counts the number of samples that fall within the unit circle. The final approximation of Pi is obtained by summing the counts from all processors and dividing by the total number of samples.
+
+.. code-block:: c
+    :linenos:
+
+    #include<mpi.h>
+
+    int rank, size;
+    int count=0, count_tot=0;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    int start = rank * N /size;
+    int end = (rank+1) * N /size;
+
+    for (i=start; i<end; i++) {
+        x = (double)rand_r(&seed)/(double)RAND_MAX; 
+        y = (double)rand_r(&seed)/(double)RAND_MAX;
+
+        if (x*x + y*y <= 1.0) count++; 
+        MPI_Reduce(*count, &count_tot, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
+    }
+
+.. note::
+    The user organises the copies of data for each parallel process.
+
