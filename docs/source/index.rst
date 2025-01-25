@@ -27,8 +27,8 @@ Contents
 --------
 
 .. toctree::
-   :maxdepth: 2
+   
    
    start
-   MPI101
+   tutorial
 
