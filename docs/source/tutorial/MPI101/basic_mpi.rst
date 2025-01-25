@@ -1,0 +1,31 @@
+The Basic MPI calls
+-----------------------
+
+.. admonition:: Overview
+    :class: Overview
+
+    * **Tutorial:** 20 min
+
+        **Objectives:**
+            #. Learn six monstly used MPI calls.
+
+MPI can be very easy to use. If your code only needs simple communication patterns, such as point-to-point communication, you can get by with just six MPI calls. These six calls are:
+
+1. **MPI_Init:** Initializes the MPI environment.
+2. **MPI_Comm_size:** Returns the total number of processes in a communicator.
+3. **MPI_Comm_rank:** Returns the rank of the calling process in a communicator.
+4. **MPI_Send:** Sends a message to a specific process.
+5. **MPI_Recv:** Receives a message from a specific process.
+6. **MPI_Finalize:** Terminates the MPI environment.
+
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_INIT()
+
+    C Binding:
+
+    .. code-block:: c
+
+        int MPI_Init(int &argc, char &argv)
