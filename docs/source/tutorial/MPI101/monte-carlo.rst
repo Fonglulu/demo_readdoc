@@ -13,3 +13,20 @@ Example: Monte-carlo Approximation of Pi
 In this example, we generate :math:`N` random sampling points within a square, and count the number :math:`h` of samples that fall in the unit circle. Then the approximation of :math:`\pi` is given by: :math:`4h/N`.
 
 .. image:: ../../figures/Monte-Carlo01.jpg
+
+A serial implementation of the Monte Carlo method to approximate Pi may look like the following:
+.. code-block:: c
+    :linenos:
+
+    seed = 1; /* seed for random number generator */
+    for (i=0; i<N; i++) {
+        x = (double)rand_r(&seed)/(double)RAND_MAX; /* RAND_MAX to normalise */
+        y = (double)rand_r(&seed)/(double)RAND_MAX;
+
+        
+        if (x*x + y*y <= 1.0) h++; 
+
+    }
+
+
+**Parallel Monte Carlo Pi Approximation:** To parallelize the Monte Carlo method, we can divide the work among multiple processors. Each processor generates a subset of the total random samples and counts the number of samples that fall within the unit circle. The final approximation of Pi is obtained by summing the counts from all processors and dividing by the total number of samples.
