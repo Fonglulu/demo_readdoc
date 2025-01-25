@@ -12,8 +12,8 @@ Consider a computing task that takes one processor :math:`t` time to complete wh
 We see in both cases, it requires the ability to scale the number of processors to solve the same problem. This is where MPI comes in - utilise multiple processors via communications.
 
 
-What MPI does and doesn't do
-~~~~~~~~~~~~~~~~~
+**What MPI does and doesn't do**
+
 To achieve the scaling mentioned above, MPI provides the following for the programmer:
 
 .. keypoint::
