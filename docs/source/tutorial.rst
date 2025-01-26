@@ -9,3 +9,10 @@ In this section, we will learn the basics of MPI. Many people get by writing par
     tutorial/MPI101/monte-carlo
     tutorial/MPI101/basic_mpi
     turotial/MPI101/model_problem
+
+Topic 1: Syntax and Semantics
+=============================
+
+.. toctree::
+    tutorial/Topic_one/semantics
+
