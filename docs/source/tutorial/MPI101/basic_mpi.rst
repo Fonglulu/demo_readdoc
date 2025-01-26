@@ -132,3 +132,8 @@ Combining the basic MPI calls, we can write summarise a MPI program in the follo
         MPI_Finalize();
         return 0;
     }
+
+.. admonition:: Exercise
+    :class: hint
+
+    Review the given program MC_pi.c to understand the structure of a basic MPI program.

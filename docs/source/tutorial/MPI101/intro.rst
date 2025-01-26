@@ -17,8 +17,7 @@ We see in both cases, it requires the ability to scale the number of processors 
 To achieve the scaling mentioned above, MPI provides the following for the programmer:
 
 .. note::
-    MPI provides a standard interface for parallel programming that includes:
-        1. a communication libraries;
+\       1. a communication libraries;
         2. datatypes;
         3. language bindings with C and Fortran;
         4. parallel I/O;
@@ -26,7 +25,7 @@ To achieve the scaling mentioned above, MPI provides the following for the progr
         6. and many more
 
 .. note::
-    However, what MPI doesn't do for programmers is:
+    However, what MPI does not do for programmers is:
     **It doesn't write or design the parallel implementation for you.**
 
 .. note::
