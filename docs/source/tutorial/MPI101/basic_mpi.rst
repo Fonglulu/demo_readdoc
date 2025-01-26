@@ -60,8 +60,9 @@ The basic communication management in MPI is done using the following functions:
     :class: hint
 
     MPI_COMM_SIZE(comm, size)
-        IN **comm** communicator (handle)
-        OUT **size** number of processes in the group of comm (integer)
+        IN **comm**: communicator (handle)
+
+        OUT **size**: number of processes in the group of comm (integer)
     C Binding:
 
     .. code-block:: c
@@ -74,8 +75,9 @@ The basic communication management in MPI is done using the following functions:
     :class: hint
 
     MPI_COMM_RANK(comm, rank)
-        IN **comm** communicator (handle)
-        OUT **rank** rank of the calling process in group of comm (integer)
+        IN **comm**: communicator (handle)
+
+        OUT **rank**: rank of the calling process in group of comm (integer)
     C Binding:
 
     .. code-block:: c
