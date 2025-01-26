@@ -48,10 +48,11 @@ As we saw in the our first MPI call **MPI_Init()**, MPI uses a communicator to d
 
 
 .. image:: ../../figures/communicator.png
-    :alt: Overlapping communicators of three processes.
+    :alt: Overlapping communicators 
 
+    Caption: Overlapping communicators between three processes
 
-Baisc Communication Management
+Basic Communication Management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 The basic communication management in MPI is done using the following functions:
 
@@ -59,8 +60,8 @@ The basic communication management in MPI is done using the following functions:
     :class: hint
 
     MPI_COMM_SIZE(comm, size)
-        IN comm communicator (handle)
-        OUT size number of processes in the group of comm (integer)
+        IN **comm** communicator (handle)
+        OUT **size** number of processes in the group of comm (integer)
     C Binding:
 
     .. code-block:: c
@@ -73,8 +74,8 @@ The basic communication management in MPI is done using the following functions:
     :class: hint
 
     MPI_COMM_RANK(comm, rank)
-        IN comm communicator (handle)
-        OUT rank rank of the calling process in group of comm (integer)
+        IN **comm** communicator (handle)
+        OUT **rank** rank of the calling process in group of comm (integer)
     C Binding:
 
     .. code-block:: c
@@ -99,7 +100,7 @@ Once the MPI program has completed its work, it is important to close the MPI en
         int MPI_Finalize()
 
 .. note::
-    #. **MPI_Finalize()**  cleans up the MPI environment and should be called after all other MPI functions have been called.
-    #. However, it does not shit down the processes.
-    #. Behaviour could be undefined if called on a process that still particpates in communication.
+    #. **MPI_Finalize()** cleans up the MPI environment and should be called after all other MPI functions have been called.
+    #. However, it does not shut down the processes.
+    #. Behaviour could be undefined if called on a process that still participates in communication.
     #. Consider using **MPI_Abort** for error capture.
