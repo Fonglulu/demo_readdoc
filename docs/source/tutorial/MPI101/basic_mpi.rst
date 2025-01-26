@@ -49,3 +49,57 @@ As we saw in the our first MPI call **MPI_Init()**, MPI uses a communicator to d
 
 .. image:: ../../figures/communicator.png
     :alt: Overlapping communicators of three processes.
+
+
+Baisc Communication Management
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+The basic communication management in MPI is done using the following functions:
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_COMM_SIZE(comm, size)
+        IN comm communicator (handle)
+        OUT size number of processes in the group of comm (integer)
+    C Binding:
+
+    .. code-block:: c
+
+        // determine the number of processes in the group of comm
+        int MPI_Comm_size(MPI_Comm comm, int *size)
+
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_COMM_RANK(comm, rank)
+        IN comm communicator (handle)
+        OUT rank rank of the calling process in group of comm (integer)
+    C Binding:
+
+    .. code-block:: c
+
+        // determine the rank of the calling process in the group of comm
+        int MPI_Comm_rank(MPI_Comm comm, int *rank)
+
+
+
+"Close" MPI process
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Once the MPI program has completed its work, it is important to close the MPI environment. This is done using the **MPI_Finalize()** function.
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_FINALIZE()
+    C Binding:
+
+    .. code-block:: c
+
+        int MPI_Finalize()
+
+.. note::
+    #. **MPI_Finalize()**  cleans up the MPI environment and should be called after all other MPI functions have been called.
+    #. However, it does not shit down the processes.
+    #. Behaviour could be undefined if called on a process that still particpates in communication.
+    #. Consider using **MPI_Abort** for error capture.
