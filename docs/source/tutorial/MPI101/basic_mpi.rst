@@ -104,3 +104,29 @@ Once the MPI program has completed its work, it is important to close the MPI en
     #. However, it does not shut down the processes.
     #. Behaviour could be undefined if called on a process that still participates in communication.
     #. Consider using **MPI_Abort** for error capture.
+
+
+Combining the basic MPI calls, we can write summarise a MPI program in the following structure:
+
+.. code-block:: c
+
+    #include<stdio.h>
+    #include <mpi.h>
+
+    int main(int argc, char *argv[]) {
+        int rank, size;
+        MPI_Init(&argc, &argv);
+        double start_t, end_t;
+        start_t =  MPI_Wtime();
+        MPI_Comm world = MPI_COMM_WORLD;
+        MPI_Comm_size(world, &size);
+        MPI_Comm_rank(world, &rank);
+
+
+        /* main body of code */
+
+        end_t = MPI_Wtime();
+        printf("MPI program runtime = %f at rank %d\n", end_t - start_t, rank);
+        MPI_Finalize();
+        return 0;
+    }
