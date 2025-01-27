@@ -53,7 +53,6 @@ An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 .. image:: ../../figures/Blocking_Send.png
 
-    .. Caption: The send operation is blocking at process A. 
 
 
 .. admonition:: Definition
@@ -63,7 +62,6 @@ An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 .. image:: ../../figures/NonBlocking_Send.png
 
-    .. Caption: The send operation is non-blocking at process A.
 
 .. admonition:: Definition
     ::class: hint
@@ -73,7 +71,6 @@ An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 .. image:: ../../figures/Persistent_Send.png
 
-    .. Caption: The send operation is persistent at process A.
 
 
 
@@ -95,7 +92,7 @@ We now understand the MPI operations are realised by MPI procedures, we can form
 There for more than 400 MPI procedures in MPI Standard 4.0. We use all capital letters to denote MPI procedures, e.g., `MPI_SEND`.
 
 .. note::
-    
+
     #. All MPI procedures can either be **local** or **non-local**, depending on whether its completion requires calls on another MPI process. 
     #. An MPI operation can be realised by different MPI procedures. For example, a block send operation can be realised by different mode such as `MPI_SEND`, `MPI_SSEND`, `MPI_BSEND`, and `MPI_RSEND`.
 
