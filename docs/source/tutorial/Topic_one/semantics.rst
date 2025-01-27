@@ -61,6 +61,12 @@ An example is the blocking send operation `MPI_Send()`.
 
     Caption: The send operation is non-blocking at process A.
 
+.. admonition:: Definition
+    ::class: hint
+    A **persistent operation** is when there is a single procedure for each of the four stages of the operation.
+
+    
+
 
 MPI Procedures
 ----------------
