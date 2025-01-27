@@ -44,3 +44,28 @@ Processor A updates its row $R_i$ to processor B's row $R_i$. This can be done b
     MPI_Send(submesh[1], mesh_size, MPI_DOUBLE, lower, lowertag, MPI_COMM_WORLD);
 
 In this line of code, the data buffer starts at `submesh[1]`, the number of elements is `mesh_size`, the datatype is `MPI_DOUBLE`, the destination is `lower`, the tag is `lowertag`, and the communicator is `MPI_COMM_WORLD`.
+
+
+Topic 1A: Blocking Communication
+--------------------------------
+
+We have shown how a message is sent through `MPI_Send`. The block SEND-RECV is the basic MPI communication mechanism.
+Recall the blocking operation has all four stages packed into a single procedure.
+
+.. image:: ../../figures/Block_Send.png
+
+This diagram implies that the corresponding MPI procedure does not return until the message data and envelope have been safely stored away so that the sender is free to modify the sender buffer.
+
+
+.. admonition:: Remark
+
+    For the blocking send operation, the message might be sent directly into the matching receiver's buffer or it might be copied into a temporary system buffer. MPI offers the following communication modes for users to choose how they want to complete the blocking send operation.
+
+    #. **Standard Send**
+    #. **Buffered Send**
+    #. **Synchronous Send**
+    #. **Ready Send**
+
+    Why there four different modes for the blocking send operation? The reason is that the different modes offer different trade-offs between the cost of buffering and the cost of communication. The cost of buffering is the cost of allocating memory for buffering, the cost of communication is due to the latency of the communication, as shown in the figure below.
+
+    .. image:: ../../figures/MPI_Send_delay.png
