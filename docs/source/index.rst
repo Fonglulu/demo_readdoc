@@ -8,11 +8,7 @@ Introduction to MPI
         **Objectives:**
             #. Learn what is MPI
 
-**MPI** MPI stands for Message Passing Interface
-that creates recipes mixing random ingredients.
-The development of the standardisation is community driven and is
-derived from state-of-art research by university researchers,
-vendors of hardware, government laboratories and industry.
+**MPI** MPI stands for Message Passing Interface. It is the de-facto standard for parallel programming that enables the program to use large numbder of processors to solve a problem.
 .. It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
 .. and offers a *simple* and *intuitive* API.
 
