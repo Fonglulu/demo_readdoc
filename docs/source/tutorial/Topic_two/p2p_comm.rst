@@ -69,3 +69,5 @@ This diagram implies that the corresponding MPI procedure does not return until 
     Why there four different modes for the blocking send operation? The reason is that the different modes offer different trade-offs between the cost of buffering and the cost of communication. The cost of buffering is the cost of allocating memory for buffering, the cost of communication is due to the latency of the communication, as shown in the figure below.
 
     .. image:: ../../figures/MPI_Send_delay.png
+
+    In this diagram, the **synchronous send** is used to send message from Process A to Process B. However, Process B has lot of other stuff to do before it can be ready to receive the message. The **synchronous send** will block Process A not only until Process B is ready to receive the message but the message is posted. 
