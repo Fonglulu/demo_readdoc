@@ -75,7 +75,7 @@ An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 MPI Procedures
 ----------------
-We now understand the MPI operations are realised by MPI procedures, we can  formally introduce the concept of MPI procedures.
+We now understand the MPI operations are realised by MPI procedures, we can formally introduce the concept of MPI procedures.
 
 .. admonition:: Definition
     :class: hint
@@ -90,4 +90,34 @@ We now understand the MPI operations are realised by MPI procedures, we can  for
 There for more than 400 MPI procedures in MPI Standard 4.0. We use all capital letters to denote MPI procedures, e.g., `MPI_SEND`.
 
 .. note::
-    All MPI procedures can either be **local** or **non-local**, depending on whether its completion requires calls on another MPI process. 
+    #. All MPI procedures can either be **local** or **non-local**, depending on whether its completion requires calls on another MPI process. 
+    #. An MPI operation can be realised by different MPI procedures. For example, a block send operation can be realised by different mode such as `MPI_SEND`, `MPI_SSEND`, `MPI_BSEND`, and `MPI_RSEND`.
+
+
+MPI Functions
+----------------
+
+.. admonition:: Definition
+    :class: hint
+
+    An **MPI function** is a language-specific binding of an MPI procedure. It is a function that can be called from a program written in a specific language, e.g., C, Fortran. 
+
+.. admonition:: Example
+    :class: hint
+
+    MPI_Send, MPI_Probe
+
+Note that to distinguish betwee MPI procedure and MPI function, the MPI functions use lower case.
+
+
+
+
+We summarise the semantics with two diagrams:
+
+.. image:: ../../figures/Blocking_operation.png
+
+    Caption: Blocking send operation realised by two different MPI procedures
+
+.. image:: ../../figures/Nonblocking_operation.png
+
+    Caption: Non-blocking send operation realised by two different groups of MPI procedures, each group consists of two MPI procedures.
