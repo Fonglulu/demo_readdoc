@@ -46,7 +46,7 @@ We can apply these stages to define the four aforementioned MPI operations.
     ::class: hint
     A **blocking operation** is when the four stages are combined into a single procedure call.
 
-An example is the blocking send operation `MPI_Send()`.
+An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 .. image:: ../../figures/Blocking_Send.png
 
@@ -65,14 +65,24 @@ An example is the blocking send operation `MPI_Send()`.
     ::class: hint
     A **persistent operation** is when there is a single procedure for each of the four stages of the operation.
 
-    
+
 
 
 MPI Procedures
 ----------------
-, we introduce the concept of MPI procedures.
+We now understand the MPI operations are realised by MPI procedures, we can  formally introduce the concept of MPI procedures.
 
 .. admonition:: Definition
     :class: hint
 
-    An **MPI procedure** describes functionalities and are specified using a language-independent notation. 
+    An **MPI procedure** describes functionalities and are specified using a language-independent notation. An MPI operation-related procedure implements at least a part of stage of an MPI operation.
+
+.. admonition:: Example
+    :class: hint
+
+    MPI_SEND, MPI_PROBE
+
+There for more than 400 MPI procedures in MPI Standard 4.0. We use all capital letters to denote MPI procedures, e.g., `MPI_SEND`.
+
+.. note::
+    All MPI procedures can either be **local** or **non-local**, depending on whether its completion requires calls on another MPI process. 
