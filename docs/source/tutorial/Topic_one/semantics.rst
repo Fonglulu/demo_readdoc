@@ -17,6 +17,8 @@ We discuss the semantics of MPI with the structure illustrated in the following 
 
 .. image:: ../../figures/MPI_operation.png
 
+
+
 MPI Operations
 ----------------
 First, we introduce the concept of MPI operations.
@@ -50,7 +52,7 @@ An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 .. image:: ../../figures/Blocking_Send.png
 
-    Caption: The send operation is blocking at process A. 
+    .. Caption: The send operation is blocking at process A. 
 
 
 .. admonition:: Definition
@@ -59,7 +61,7 @@ An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 .. image:: ../../figures/NonBlocking_Send.png
 
-    Caption: The send operation is non-blocking at process A.
+    .. Caption: The send operation is non-blocking at process A.
 
 .. admonition:: Definition
     ::class: hint
@@ -68,7 +70,7 @@ An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 .. image:: ../../figures/Persistent_Send.png
 
-    Caption: The send operation is persistent at process A.
+    .. Caption: The send operation is persistent at process A.
 
 
 
@@ -116,8 +118,8 @@ We summarise the semantics with two diagrams:
 
 .. image:: ../../figures/Blocking_operation.png
 
-    Caption: Blocking send operation realised by two different MPI procedures
+    .. Caption: Blocking send operation realised by two different MPI procedures
 
 .. image:: ../../figures/Nonblocking_operation.png
 
-    Caption: Non-blocking send operation realised by two different groups of MPI procedures, each group consists of two MPI procedures.
+    .. Caption: Non-blocking send operation realised by two different groups of MPI procedures, each group consists of two MPI procedures.

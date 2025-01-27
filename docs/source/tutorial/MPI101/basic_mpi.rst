@@ -48,9 +48,9 @@ As we saw in the our first MPI call **MPI_Init()**, MPI uses a communicator to d
 
 
 .. image:: ../../figures/communicator.png
-    :alt: Overlapping communicators 
+    .. :alt: Overlapping communicators 
 
-    Caption: Overlapping communicators between three processes
+    .. Caption: Overlapping communicators between three processes
 
 Basic Communication Management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
