@@ -52,7 +52,8 @@ We can apply these stages to define the four aforementioned MPI operations.
 An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 .. image:: ../../figures/Blocking_Send.png
-
+ 
+The send operation is blocking at process A. 
 
 
 .. admonition:: Definition
@@ -62,15 +63,17 @@ An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 .. image:: ../../figures/NonBlocking_Send.png
 
+The send operation is non-blocking at process A.
 
 .. admonition:: Definition
     ::class: hint
-
+    
     A **persistent operation** is when there is a single procedure for each of the four stages of the operation.
 
 
 .. image:: ../../figures/Persistent_Send.png
 
+The send operation is persistent at process A.
 
 
 
@@ -119,8 +122,8 @@ We summarise the semantics with two diagrams:
 
 .. image:: ../../figures/Blocking_operation.png
 
-    .. Caption: Blocking send operation realised by two different MPI procedures
+Blocking send operation realised by two different MPI procedures
 
 .. image:: ../../figures/Nonblocking_operation.png
 
-    .. Caption: Non-blocking send operation realised by two different groups of MPI procedures, each group consists of two MPI procedures.
+Non-blocking send operation realised by two different groups of MPI procedures, each group consists of two MPI procedures.
