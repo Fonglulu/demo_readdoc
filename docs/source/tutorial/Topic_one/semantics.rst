@@ -53,7 +53,13 @@ An example is the blocking send operation `MPI_Send()`.
     Caption: The send operation is blocking at process A. 
 
 
+.. admonition:: Definition
+    ::class: hint
+    A **non-blocking operation** is when the the **initialisation** and **starting** stages are combined into a single nonblocking procedure call, and the **completion** and **freeing** stages are combined into another single procedure call.
 
+.. image:: ../../figures/Non-blocking_Send.png
+
+    Caption: The send operation is non-blocking at process A.
 
 
 MPI Procedures
