@@ -16,3 +16,10 @@ Topic 1: Syntax and Semantics
 .. toctree::
     tutorial/Topic_one/semantics
 
+
+Topic 2: Point-to-point Communication
+=====================================
+
+.. toctree::
+    tutorial/Topic_two/p2p_comm
+
