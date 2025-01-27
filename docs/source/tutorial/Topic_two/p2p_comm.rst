@@ -10,30 +10,39 @@ The point-to-point communication is the most original form of communication in M
 .. admonition:: Definition
 
     The **message data** is made of three components: (address, count, datatype).
+
     **address**: the beginning address of the data buffer.
+
     **count**: the number of successive entries of the type specified by datatype.
+
     **datatype**: the MPI datatype of the data.
 
 
 .. admonition:: Definition
 
     The **message envelope** is made of four components: (source, destination, tag, communicator).
+
     **source**: the rank of the sending MPI process.
+
     **destination**: the rank of the receiving MPI process.
+
     **tag**: a message identifier.
+
     **communicator**: the communicator over which the message is sent.
 
 
 .. admonition:: Remark
 
-    #. The **datatype** is a predefined name to specify machine-independent data elements. The basic datatypes are `MPI_INT`, `MPI_DOUBLE`(in C); MPI_INTEGER, MPI_REAL (in Fortran).
+    1. The **datatype** is a predefined name to specify machine-independent data elements. The basic datatypes are `MPI_INT`, `MPI_DOUBLE` (in C); `MPI_INTEGER`, `MPI_REAL` (in Fortran).
     MPI always provides derived datatypes which are user-defined mix of basic datatypes.
     The rational for MPI datatype is to support communications between machines with different memory representations.
-    #. The **tag** is a message identifier that allows the receiver to distinguish between different messages from the same source.
-    #. The **communicator** specifies a 'communication universe'. Messages are always received within the 'communication universe' they were sent, and messages sent in different 'communication universe' do not interfere. For example, `MPI_COMM_WORLD` is a specifies the communication within all processes available at initialization time.
+
+    2. The **tag** is a message identifier that allows the receiver to distinguish between different messages from the same source.
+
+    3. The **communicator** specifies a 'communication universe'. Messages are always received within the 'communication universe' they were sent, and messages sent in different 'communication universe' do not interfere. For example, `MPI_COMM_WORLD` is a specifies the communication within all processes available at initialization time.
 
 
-In our model problem, we need to send the nodal values of the second bottom row to the neighouring processor's top boundary row; as shown in the figure below:
+In our model problem, we need to send the nodal values of the second bottom row to the neighbouring processor's top boundary row; as shown in the figure below:
 
 .. image:: ../../figures/Submesh.png
 
@@ -62,8 +71,11 @@ This diagram implies that the corresponding MPI procedure does not return until 
     For the blocking send operation, the message might be sent directly into the matching receiver's buffer or it might be copied into a temporary system buffer. MPI offers the following communication modes for users to choose how they want to complete the blocking send operation.
 
     #. **Standard Send**
+
     #. **Buffered Send**
+
     #. **Synchronous Send**
+
     #. **Ready Send**
 
     Why there four different modes for the blocking send operation? The reason is that the different modes offer different trade-offs between the cost of buffering and the cost of communication. The cost of buffering is the cost of allocating memory for buffering, the cost of communication is due to the latency of the communication, as shown in the figure below.
