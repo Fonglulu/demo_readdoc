@@ -46,7 +46,11 @@ We can apply these stages to define the four aforementioned MPI operations.
     ::class: hint
     A **blocking operation** is when the four stages are combined into a single procedure call.
 
+An example is the blocking send operation `MPI_Send()`.
 
+.. image:: ../../figures/Blocking_Send.png
+
+    Caption: The send operation is blocking at process A. 
 
 
 
