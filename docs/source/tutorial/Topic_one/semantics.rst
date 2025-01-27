@@ -29,7 +29,7 @@ First, we introduce the concept of MPI operations.
     An **MPI operation** is a sequence of steps performed by the MPI library to establish and enable data transfer and/or synchronishation. It consists of four stages: **initialisation**, **starting**, **completion**, and **freeing**. An MPI operation is implemented as a set of one or more MPI procedures. 
 
 
-The main MPI opeartions are: **Blocking Operations**, **Non-blocking Operations**, **Collective Operations**, and **Persistent Operations**. We will discuss each of these in detail in the upcoming sections.
+The main MPI operations are: **Blocking Operations**, **Non-blocking Operations**, **Collective Operations**, and **Persistent Operations**. We will discuss each of these in detail in the upcoming sections.
 
 .. note::
     An MPI operation describes the property of a class of data transfer mechanism but does not define a unique MPI procedure.
@@ -46,6 +46,7 @@ We can apply these stages to define the four aforementioned MPI operations.
 
 .. admonition:: Definition
     ::class: hint
+
     A **blocking operation** is when the four stages are combined into a single procedure call.
 
 An example is the blocking send operation is the MPI procedure `MPI_SEND`.
@@ -57,6 +58,7 @@ An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 .. admonition:: Definition
     ::class: hint
+
     A **non-blocking operation** is when the the **initialisation** and **starting** stages are combined into a single nonblocking procedure call, and the **completion** and **freeing** stages are combined into another single procedure call.
 
 .. image:: ../../figures/NonBlocking_Send.png
@@ -65,6 +67,7 @@ An example is the blocking send operation is the MPI procedure `MPI_SEND`.
 
 .. admonition:: Definition
     ::class: hint
+
     A **persistent operation** is when there is a single procedure for each of the four stages of the operation.
 
 
@@ -92,6 +95,7 @@ We now understand the MPI operations are realised by MPI procedures, we can form
 There for more than 400 MPI procedures in MPI Standard 4.0. We use all capital letters to denote MPI procedures, e.g., `MPI_SEND`.
 
 .. note::
+    
     #. All MPI procedures can either be **local** or **non-local**, depending on whether its completion requires calls on another MPI process. 
     #. An MPI operation can be realised by different MPI procedures. For example, a block send operation can be realised by different mode such as `MPI_SEND`, `MPI_SSEND`, `MPI_BSEND`, and `MPI_RSEND`.
 
