@@ -24,7 +24,6 @@ MPI Operations
 First, we introduce the concept of MPI operations.
 
 .. admonition:: Definition
-    :class: hint
 
     An **MPI operation** is a sequence of steps performed by the MPI library to establish and enable data transfer and/or synchronishation. It consists of four stages: **initialisation**, **starting**, **completion**, and **freeing**. An MPI operation is implemented as a set of one or more MPI procedures. 
 
@@ -45,7 +44,6 @@ The four stages of an MPI operation are:
 We can apply these stages to define the four aforementioned MPI operations.
 
 .. admonition:: Definition
-    ::class: hint
 
     A **blocking operation** is when the four stages are combined into a single procedure call.
 
@@ -57,7 +55,6 @@ The send operation is blocking at process A.
 
 
 .. admonition:: Definition
-    ::class: hint
 
     A **non-blocking operation** is when the the **initialisation** and **starting** stages are combined into a single nonblocking procedure call, and the **completion** and **freeing** stages are combined into another single procedure call.
 
@@ -83,7 +80,6 @@ MPI Procedures
 We now understand the MPI operations are realised by MPI procedures, we can formally introduce the concept of MPI procedures.
 
 .. admonition:: Definition
-    :class: hint
 
     An **MPI procedure** describes functionalities and are specified using a language-independent notation. An MPI operation-related procedure implements at least a part of stage of an MPI operation.
 
