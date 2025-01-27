@@ -17,7 +17,7 @@ We see in both cases, it requires the ability to scale the number of processors 
 To achieve the scaling mentioned above, MPI provides the following for the programmer:
 
 .. note::
-\       1. a communication libraries;
+        1. a communication libraries;
         2. datatypes;
         3. language bindings with C and Fortran;
         4. parallel I/O;

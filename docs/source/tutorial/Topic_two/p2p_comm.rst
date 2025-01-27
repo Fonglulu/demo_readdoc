@@ -55,13 +55,13 @@ Processor A updates its row $R_i$ to processor B's row $R_i$. This can be done b
 In this line of code, the data buffer starts at `submesh[1]`, the number of elements is `mesh_size`, the datatype is `MPI_DOUBLE`, the destination is `lower`, the tag is `lowertag`, and the communicator is `MPI_COMM_WORLD`.
 
 
-Topic 1A: Blocking Communication
+Topic 2A: Blocking Communication
 --------------------------------
 
 We have shown how a message is sent through `MPI_Send`. The block SEND-RECV is the basic MPI communication mechanism.
 Recall the blocking operation has all four stages packed into a single procedure.
 
-.. image:: ../../figures/Block_Send.png
+.. image:: ../../figures/Blocking_Send.png
 
 This diagram implies that the corresponding MPI procedure does not return until the message data and envelope have been safely stored away so that the sender is free to modify the sender buffer.
 
