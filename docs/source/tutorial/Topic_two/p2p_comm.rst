@@ -82,4 +82,36 @@ This diagram implies that the corresponding MPI procedure does not return until 
 
     .. image:: ../../figures/MPI_Send_delay.png
 
-    In this diagram, the **synchronous send** is used to send message from Process A to Process B. However, Process B has lot of other stuff to do before it can be ready to receive the message. The **synchronous send** will block Process A not only until Process B is ready to receive the message but the message is posted. 
+    In this diagram, the **synchronous send** is used to send message from Process A to Process B. However, Process B has a lot of other stuff to do before it can be ready to receive the message. The **synchronous send** will block Process A not only until Process B is ready to receive the message but the message is posted. 
+
+
+    **`MPI_SEND(Standard mode)`**
+    The standard mode of MPI blocking send operation is the widely used `MPI_SEND`. 
+    This mode will either buffer the outgoing data or sends to the matching receiver's buffer - up to the particular MPI implementation to decide. In the diagram below, we use the dash line to indicate the possible route for sending the data in this mode.
+
+    .. image:: ../../figures/Standard_send.png
+
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_SEND(buf, count, datatype, dest, tag, comm)
+        IN **buf**: starting address of buffer (choice)
+
+        IN **count**: number of entries in buffer (non-negative integer)
+
+        IN **datatype**: datatype of elements in send buffer (handle)
+
+        IN **dest**: rank of destination (integer)
+
+        IN **tag**: message tag (integer)
+
+        IN **comm**: communicator (handle)
+
+
+    C Binding:
+
+    .. code-block:: c
+
+        // bug message is sent from the calling rank to dest rank
+        int MPI_Send(const void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm);
