@@ -132,11 +132,13 @@ This diagram implies that the corresponding MPI procedure does not return until 
     #. It may complete before the matching RECV is posted.
 
 
-    **MPI_BSEND`(Buffered mode)**
 
-    The buffer mode buffers the message to the application buffer provided by the user.
 
-    .. image:: ../../figures/Buffer_send.png
+**`MPI_BSEND`(Buffered mode)**
+
+The buffer mode buffers the message to the application buffer provided by the user.
+
+.. image:: ../../figures/Buffer_send.png
 
 
 .. admonition:: Key MPI call
