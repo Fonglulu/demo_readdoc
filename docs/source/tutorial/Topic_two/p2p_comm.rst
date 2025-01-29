@@ -115,3 +115,18 @@ This diagram implies that the corresponding MPI procedure does not return until 
 
         // bug message is sent from the calling rank to dest rank
         int MPI_Send(const void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm);
+
+.. admonition:: Key Points
+    :class: hint
+
+    #. Blocking operations implies that neither the send buffer nor the argument list can be modified until the buffer is safely stored away.
+
+    #. System buffer may be outside the application space.
+
+    #. How system buffer is chosen is up to particular MPI implementations.
+
+    #. Eager protocol - small messages
+
+    #. Rendezvous protocol - large messages
+
+    #. It may complete before the matching RECV is posted.
