@@ -85,7 +85,7 @@ This diagram implies that the corresponding MPI procedure does not return until 
     In this diagram, the **synchronous send** is used to send message from Process A to Process B. However, Process B has a lot of other stuff to do before it can be ready to receive the message. The **synchronous send** will block Process A not only until Process B is ready to receive the message but the message is posted. 
 
 
-    **`MPI_SEND(Standard mode)`**
+    **`MPI_SEND`(Standard mode)**
     The standard mode of MPI blocking send operation is the widely used `MPI_SEND`. 
     This mode will either buffer the outgoing data or sends to the matching receiver's buffer - up to the particular MPI implementation to decide. In the diagram below, we use the dash line to indicate the possible route for sending the data in this mode.
 
@@ -130,3 +130,49 @@ This diagram implies that the corresponding MPI procedure does not return until 
     #. Rendezvous protocol - large messages
 
     #. It may complete before the matching RECV is posted.
+
+
+    **MPI_BSEND`(Buffered mode)**
+
+    The buffer mode buffers the message to the application buffer provided by the user.
+
+    .. image:: ../../figures/Buffer_send.png
+
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    #. Users are responsible for providing enough space for buffer.
+
+    #. The buffer is allowcated by `MPI_Buffer_attach` and deallocated by `MPI_Buffer_detach`.
+
+    #. Only one buffer is allowed in a process at a time.
+
+    #. The implementation varies.
+
+    #. The buffer management makes it error-prone.
+
+
+
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_BSEND(buf, count, datatype, dest, tag, comm)
+        IN **buf**: starting address of buffer (choice)
+
+        IN **count**: number of entries in buffer (non-negative integer)
+
+        IN **datatype**: datatype of elements in send buffer (handle)
+
+        IN **dest**: rank of destination (integer)
+
+        IN **tag**: message tag (integer)
+
+        IN **comm**: communicator (handle)
+
+
+   .. code-block:: c
+
+    // bug message is sent from the calling rank to dest rank
+    int MPI_Bsend(const void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm);
