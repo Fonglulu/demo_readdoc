@@ -178,3 +178,31 @@ The buffer mode buffers the message to the application buffer provided by the us
 
     // bug message is sent from the calling rank to dest rank
     int MPI_Bsend(const void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm);
+
+
+**`MPI_SSEND`(Synchronous mode)**
+
+The synchronous mode completes only if a matching receive is posted, and the receiver has started to receive the message date.
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    #. It implies that the sender has to hold until a matching receive is posted, and the receiver has started to receive the message before continuing.
+
+    #. It also ensures both processes have reached a certain point in the execution.
+
+    #. A standard send can be implemented as a synchronous send.
+
+The `MPI_SSEND` syntax is the same as `MPI_SEND`.
+
+The read mode `MPI_RSEND` is not discussed here. It is rarely used in practice.
+
+
+The subtle difference between the different modes can be seen in the figure below.
+
+.. image:: ../../figures/MPI_deadlock.png
+
+In this diagram, the message sent by each process has to be copied out before the send operation returns and the receive operation starts. 
+For the program to complete, it is necessary for at least one of the two messages sent be buffered. 
+Thus, this program can succeed only if the communication system can buffer the message data. 
+Otherwise, the program will deadlock.
