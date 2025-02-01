@@ -249,3 +249,5 @@ Finally, unlike the different modes of blocking send operation, there is only on
     Focusing on each process, we can see that the process sends the second top and second bottom rows to the neighbouring processes, and receives updates on the top and bottom rows from the neighbouring processes; as shown in the figure below:
 
     .. image:: ../../figures/MPI_Communicate.png
+
+    In this diagram, each process sends two outgoing messages and receives tow incoming messages. To distinguish them, we use different upper tag and lower tag for the messages.
