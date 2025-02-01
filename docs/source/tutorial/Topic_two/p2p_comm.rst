@@ -206,3 +206,46 @@ In this diagram, the message sent by each process has to be copied out before th
 For the program to complete, it is necessary for at least one of the two messages sent be buffered. 
 Thus, this program can succeed only if the communication system can buffer the message data. 
 Otherwise, the program will deadlock.
+
+
+**`MPI_RECV`**
+Next we will talk about the blocking receive operation.
+In MPI, SEND and RECV are asymmetric operations. The sender initiates the communication, and the receiver waits for the message to arrive.
+A receiver may accept messages from an arbitrary sender, but the sender must specify a unique reciver.
+The length of the RECV buffer can also be equal to or greater than the length of the SEND message.
+Finally, unlike the different modes of blocking send operation, there is only one RECV procedure but it mathces all of the send modes.
+
+
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_RECV(buf, count, datatype, source, tag, comm, status)
+        IN **buf**: starting address of buffer (choice)
+
+        IN **count**: number of entries in buffer (non-negative integer)
+
+        IN **datatype**: datatype of elements in send buffer (handle)
+
+        IN **source**: rank of source or `MPI_ANY_SOURCE` (integer)
+
+        IN **tag**: message tag or `MPI_ANY_TAG` (integer)
+
+        IN **comm**: communicator (handle)
+
+        OUT **status** status object (status) 
+
+    .. code-block:: c
+
+        // bug message is received at the calling rank 
+        int MPI_Recv(void *buf, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Status *status);
+
+.. note::
+
+    The `MPI_Status` object is used to store information about the received message, such as the source, tag, and number of elements received. It is optional to use the `MPI_Status` object, but it is useful for debugging and error checking. In C, the `MPI_Status` object is a structure that contains the following fields: `MPI_SOURCE`, `MPI_TAG`, `MPI_ERROR`, and in Fortran, it is an array of integers.
+
+    **Model Problem**
+    Now we apply the SEND and RECV operations to our model problems. 
+    Focusing on each process, we can see that the process sends the second top and second bottom rows to the neighbouring processes, and receives updates on the top and bottom rows from the neighbouring processes; as shown in the figure below:
+
+    .. image:: ../../figures/MPI_Communicate.png
