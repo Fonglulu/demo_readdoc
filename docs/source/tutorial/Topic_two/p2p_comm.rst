@@ -244,10 +244,62 @@ Finally, unlike the different modes of blocking send operation, there is only on
 
     The `MPI_Status` object is used to store information about the received message, such as the source, tag, and number of elements received. It is optional to use the `MPI_Status` object, but it is useful for debugging and error checking. In C, the `MPI_Status` object is a structure that contains the following fields: `MPI_SOURCE`, `MPI_TAG`, `MPI_ERROR`, and in Fortran, it is an array of integers.
 
-    **Model Problem**
-    Now we apply the SEND and RECV operations to our model problems. 
-    Focusing on each process, we can see that the process sends the second top and second bottom rows to the neighbouring processes, and receives updates on the top and bottom rows from the neighbouring processes; as shown in the figure below:
 
-    .. image:: ../../figures/MPI_Communicate.png
+**Model Problem**
+Now we apply the SEND and RECV operations to our model problems. 
+Focusing on each process, we can see that the process sends the second top and second bottom rows to the neighbouring processes, and receives updates on the top and bottom rows from the neighbouring processes; as shown in the figure below:
 
-    In this diagram, each process sends two outgoing messages and receives tow incoming messages. To distinguish them, we use different upper tag and lower tag for the messages.
+.. image:: ../../figures/MPI_Communicate.png
+
+In this diagram, each process sends two outgoing messages and receives tow incoming messages. To distinguish them, we use different upper tag and lower tag for the messages.
+
+.. admonition:: Exercise
+    :class: hint
+
+    In laplace_mpi_blocking.c, complete the communication by writing blocking SEND and RECE using MPI_SEND and MPR_RECV.
+
+
+
+Topic 2D: Nonblocking Communication
+-----------------------------------
+
+Since the network speed is much slower than floating-point operations, time spent on waiting for completing the matching SEND and RECV in blocking operations can be used for computation. 
+This is realised by nonblocking operations. 
+Recall the nonblocking opeaxrtion packs **initialisation** and **starting** stages into one MPI procedure and **completion** and **freeing** stages into a separate procedure, as shown in the following diagram:
+
+.. image:: ../../figures/NonBlocking_Send.png
+
+This allows the sender to continue computation just after handing over the control of data buffer. 
+The first nonblocking SEND procedure is `MPI_ISEND`.
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_ISEND(buf, count, datatype, dest, tag, comm, request)
+        IN **buf**: starting address of buffer (choice)
+
+        IN **count**: number of entries in buffer (non-negative integer)
+
+        IN **datatype**: datatype of elements in send buffer (handle)
+
+        IN **dest**: rank of destination (integer)
+
+        IN **tag**: message tag or `MPI_ANY_TAG` (integer)
+
+        IN **comm**: communicator (handle)
+
+        OUT **request**: communication request (handle)
+
+
+    .. code-block:: c
+
+        //buffer msg is sent from the calling rank to dest rank
+        int MPI_Isend(const void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm, MPI_Request *request);
+
+    The nonblocking SEND operation has the same communication modes as the blocking SEND operation, i.e., `MPI_Isend`, `MPI_IBSEND`, `MPI_ISSEND`, and `MPI_IRSEND`. We will not discuss them here.
+
+    All arguments are the same as in `MPI_SEND` except the additional `request` argument in the nonblocking SEND operation. 
+    The `request` is an opaque object used to identify communication operations and match the operation that initiates the communication with the operation that completes it.
+    In other words, the `request` is used to track the progress of the communication operation and used in the second nonblocking procedure to complete the communication.
+
+    
