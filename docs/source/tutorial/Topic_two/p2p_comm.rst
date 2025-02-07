@@ -296,10 +296,74 @@ The first nonblocking SEND procedure is `MPI_ISEND`.
         //buffer msg is sent from the calling rank to dest rank
         int MPI_Isend(const void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm, MPI_Request *request);
 
-    The nonblocking SEND operation has the same communication modes as the blocking SEND operation, i.e., `MPI_Isend`, `MPI_IBSEND`, `MPI_ISSEND`, and `MPI_IRSEND`. We will not discuss them here.
+The nonblocking SEND operation has the same communication modes as the blocking SEND operation, i.e., `MPI_Isend`, `MPI_IBSEND`, `MPI_ISSEND`, and `MPI_IRSEND`. We will not discuss them here.
 
-    All arguments are the same as in `MPI_SEND` except the additional `request` argument in the nonblocking SEND operation. 
-    The `request` is an opaque object used to identify communication operations and match the operation that initiates the communication with the operation that completes it.
-    In other words, the `request` is used to track the progress of the communication operation and used in the second nonblocking procedure to complete the communication.
+All arguments are the same as in `MPI_SEND` except the additional `request` argument in the nonblocking SEND operation. 
+The `request` is an opaque object used to identify communication operations and match the operation that initiates the communication with the operation that completes it.
+In other words, the `request` is used to track the progress of the communication operation and is used in the second nonblocking procedure to complete the communication.
+
+The second nonblocking procedure is usually realised by `MPI_WAIT`.
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_WAIT(request, status)
+        INOUT **request**:  communication request (handle)
+
+        OUT **status**: status object (status)
+
+    .. code-block:: c
+
+        // wait for the completion of a nonblocking operation
+        int MPI_Wait(MPI_Request *request, MPI_Status *status);
+
+
+In our code, we will also use `MPI_Waitall` to wait for both top row and bottom row nonblocking communications to complete.
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_WAITALL(count, array_of_requests, array_of_statuses)
+        IN **count**: list length (non-negative integer)
+
+        INOUT **array_of_requests**: array of requests (array of handles)
+
+        OUT **array_of_statuses**: array of status objects (array of status)
+
+    .. code-block:: c
+
+        // wait for all nonblocking operations to complete
+        int MPI_Waitall(int count, MPI_Request array_of_requests[], MPI_Status array_of_statuses[]);
 
     
+However, we may want to just check if a communication operation is completed rather than waiting for it to complete.
+`MPI_TEST` is used for this purpose.
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_TEST(request, flag, status)
+        INOUT **request**: communication request (handle)
+
+        OUT **flag**: true if the operation is complete, false otherwise (logical)
+
+        OUT **status**: status object (status)
+
+    .. code-block:: c
+
+        // test for the completion of a nonblocking operation
+        int MPI_Test(MPI_Request *request, int *flag, MPI_Status *status);
+
+Similarly, it can test multiple communication request at once by `MPI_Testall`.
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_TESTALL(count, array_of_requests, flag, array_of_statuses)
+        IN **count**: list length (non-negative integer)
+
+        INOUT **array_of_requests**: array of requests (array of handles)
+
+        OUT **flag**: true if all operations are complete(logical)    
+
+        OUT **array_of_statuses**: array of status objects (array of status)    
