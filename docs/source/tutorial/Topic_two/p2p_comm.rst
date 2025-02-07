@@ -235,7 +235,7 @@ Finally, unlike the different modes of blocking send operation, there is only on
 
         OUT **status** status object (status) 
 
-    .. code-block:: c
+.. code-block:: c
 
         // bug message is received at the calling rank 
         int MPI_Recv(void *buf, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Status *status);
@@ -291,7 +291,7 @@ The first nonblocking SEND procedure is `MPI_ISEND`.
         OUT **request**: communication request (handle)
 
 
-    .. code-block:: c
+ .. code-block:: c
 
         //buffer msg is sent from the calling rank to dest rank
         int MPI_Isend(const void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm, MPI_Request *request);
@@ -312,7 +312,7 @@ The second nonblocking procedure is usually realised by `MPI_WAIT`.
 
         OUT **status**: status object (status)
 
-    .. code-block:: c
+.. code-block:: c
 
         // wait for the completion of a nonblocking operation
         int MPI_Wait(MPI_Request *request, MPI_Status *status);
@@ -330,7 +330,7 @@ In our code, we will also use `MPI_Waitall` to wait for both top row and bottom 
 
         OUT **array_of_statuses**: array of status objects (array of status)
 
-    .. code-block:: c
+.. code-block:: c
 
         // wait for all nonblocking operations to complete
         int MPI_Waitall(int count, MPI_Request array_of_requests[], MPI_Status array_of_statuses[]);
@@ -349,7 +349,7 @@ However, we may want to just check if a communication operation is completed rat
 
         OUT **status**: status object (status)
 
-    .. code-block:: c
+.. code-block:: c
 
         // test for the completion of a nonblocking operation
         int MPI_Test(MPI_Request *request, int *flag, MPI_Status *status);
@@ -366,4 +366,10 @@ Similarly, it can test multiple communication request at once by `MPI_Testall`.
 
         OUT **flag**: true if all operations are complete(logical)    
 
-        OUT **array_of_statuses**: array of status objects (array of status)    
+        OUT **array_of_statuses**: array of status objects (array of status) 
+
+       
+.. code-block:: c
+    
+        // test for the completion of all nonblocking operations
+        int MPI_Testall(int count, MPI_Request array_of_requests[], int *flag, MPI_Status array_of_statuses[]);
