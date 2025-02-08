@@ -423,3 +423,43 @@ Also, its completion does not indicate that the matching SEND operation has comp
 .. image:: ../../figures/Submesh_int.png
 
 
+In this diagram, it shows that the local Jacobi method can operate on the top row of process B as soon as it has received the top row from process A.
+Observing the communication pattern, we can write the following code to overlap communication and computation:
+
+.. code-block:: c
+
+    /* Initiate sending the top and bottom row of full nodes*/
+    MPI_Isend(submesh[1], mesh_size, MPI_DOUBLE, lower, lowertag,\
+    MPI_COMM_WORLD, &bottom_bnd_requests[1]);
+
+    MPI_Isend(submesh[*ptr_rows-2], mesh_size, MPI_DOUBLE, upper, uppertag, \ 
+    MPI_COMM_WORLD, &top_bnd_requests[1]);
+
+    /* Jacobi method iterates on the interior full nodes */
+    Jacobi_int(ptr_rows, mesh_size, &submesh[0][0], &submesh_new[0][0], \ 
+    &subrhs[0][0], space);
+
+    /* Test the top and bottom row of ghost nodes */
+    MPI_Testall(2, top_bnd_requests, &top_flag, top_bnd_status);
+    MPI_Testall(2, bottom_bnd_requests, &bottom_flag, bottom_bnd_status;
+
+    /* Jacobi method iterates on top or bottom row of full nodes based \ 
+    on the testing results */
+
+.. admonition:: Exercise
+    :class: hint
+
+    Rewrite the nonblocking communication in laplace_mpi_nonblocking.c  such that the process waits until the completion of both top and bottom rows. 
+
+
+
+
+In the next section, we will introduce persistent communication.
+
+**Persistent Communication**
+We have discussed the blocking and nonblocking communication operations. The last part of point-to-point communication that we want to study is the persistent communication.
+
+Recall that the a blocking operation has all four stages packed into a single procedure, and a nonblocking operation packs the **initialisation** and **starting** stages into one MPI procedure and the **completion** and **freeing** stages into a separate procedure. Following the same semantics, a persistent operation has a single procedure for each of the four stages of the operation.
+
+Often a communication with the same argument list is repeated executed within the inner loop of a parallel program. In such a situation, it may be possible to optimize the communication by binding the list of communication arguments to a `persistent communication request` once and then repeatedly using the request to start and complete operations.
+
