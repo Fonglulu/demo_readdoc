@@ -457,9 +457,12 @@ Observing the communication pattern, we can write the following code to overlap 
 In the next section, we will introduce persistent communication.
 
 **Persistent Communication**
+
 We have discussed the blocking and nonblocking communication operations. The last part of point-to-point communication that we want to study is the persistent communication.
 
 Recall that the a blocking operation has all four stages packed into a single procedure, and a nonblocking operation packs the **initialisation** and **starting** stages into one MPI procedure and the **completion** and **freeing** stages into a separate procedure. Following the same semantics, a persistent operation has a single procedure for each of the four stages of the operation.
 
 Often a communication with the same argument list is repeated executed within the inner loop of a parallel program. In such a situation, it may be possible to optimize the communication by binding the list of communication arguments to a `persistent communication request` once and then repeatedly using the request to start and complete operations.
+
+Let's take a look at the four procedures of a persistent operation.
 
