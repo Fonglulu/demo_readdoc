@@ -456,7 +456,8 @@ Observing the communication pattern, we can write the following code to overlap 
 
 In the next section, we will introduce persistent communication.
 
-**Persistent Communication**
+Persistent Communication
+=========================
 
 We have discussed the blocking and nonblocking communication operations. The last part of point-to-point communication that we want to study is the persistent communication.
 
@@ -466,3 +467,98 @@ Often a communication with the same argument list is repeated executed within th
 
 Let's take a look at the four procedures of a persistent operation.
 
+**Persistent Send Procedure 1**
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_SEND_INIT(buf, count, datatype, dest, tag, comm, request)
+        IN **buf**: starting address of buffer (choice)
+
+        IN **count**: number of entries in buffer (non-negative integer)
+
+        IN **datatype**: datatype of elements in send buffer (handle)
+
+        IN **dest**: rank of destination (integer)
+
+        IN **tag**: message tag or `MPI_ANY_TAG` (integer)
+
+        IN **comm**: communicator (handle)
+
+        OUT **request**: communication request (handle)
+
+This procedure creates a `persistent communication request` for a RECV operation. At the creation, the request is inactive.
+
+**Persistent Send Procedure 2**
+
+Next, the request is started by the following procedure `MPI_START`.
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_START(request)
+        IN **request**: communication request (handle)
+
+.. code-block:: c
+
+        // start a persistent communication
+        int MPI_Start(MPI_Request *request);
+
+A call to `MPI_START` makes the request active, and the communication is initiated. It has the same manner as a call to `MPI_ISEND`.
+
+
+**Persistent Send Procedure 3**
+This procedure completes the communication. It uses `MPI_WAIT` as in nonblocking operations.
+
+
+**Persistent Send Procedure 4**
+Finally, the request is freed by the following procedure `MPI_REQUEST_FREE`.
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_REQUEST_FREE(request)
+        INOUT **request**: communication request (handle)
+
+
+.. code-block:: c
+    
+        // free a persistent communication request
+        int MPI_Request_free(MPI_Request *request);
+
+
+The following diagram shows the four procedures of a persistent operation.
+
+.. image:: ../../figures/Persistent_Send.png
+
+
+.. note::
+
+    There is no persistent RECV operation in MPI as MPI uses `push` mechanism for communication.
+
+
+Now, we may also rewrite the overlapping communication and computation in the persistent communication mode.
+
+.. code-block:: c
+
+    /* Initialise sending the  bottom row of full nodes */
+    MPI_Send_init(submesh[1], mesh_size, MPI_DOUBLE, lower, lowertag,\ 
+    MPI_COMM_WORLD, &bottom_bnd_requests[1]);
+
+    for (int iter = 0; iter < 100; iter++){
+    /* Activate the communication request */
+    MPI_Startall(2, bottom_bnd_requests);
+    /* Jacobi method iterates on the interior full nodes */
+    Jacobi_int(ptr_rows, mesh_size, &submesh[0][0], &submesh_new[0][0], \ 
+    &subrhs[0][0], space);
+
+    /* Test the top and bottom row of ghost nodes */
+    MPI_Testall(2, bottom_bnd_requests, &top_flag, bottom_bnd_status);
+    Jacobi_bottom(ptr_rows, mesh_size, &submesh[0][0], &submesh_new[0][0], &subrhs[0][0], space);
+
+    /* Jacobi method iterates on bottom row of full nodes based \ 
+    on the testing results */
+    MPI_Waitall(2, bottom_bnd_requests, bottom_bnd_status);
+    }
+    /* Free the request handle */
+    MPI_Request_free(bottom_bnd_request);
