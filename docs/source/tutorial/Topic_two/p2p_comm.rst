@@ -373,3 +373,53 @@ Similarly, it can test multiple communication request at once by `MPI_Testall`.
     
         // test for the completion of all nonblocking operations
         int MPI_Testall(int count, MPI_Request array_of_requests[], int *flag, MPI_Status array_of_statuses[]);
+
+
+
+The nonblocking RECV operation is similar to the nonblocking SEND operation. 
+Like its blocking counterpart, there is only one nonblocking RECV operation, `MPI_IRECV`.
+
+.. admonition:: Key MPI call
+    :class: hint
+
+    MPI_IRECV(buf, count, datatype, source, tag, comm, request)
+        OUT **buf**: starting address of buffer (choice)
+
+        IN **count**: number of entries in buffer (non-negative integer)
+
+        IN **datatype**: datatype of elements in send buffer (handle)
+
+        IN **source**: rank of source or `MPI_ANY_SOURCE` (integer)
+
+        IN **tag**: message tag or `MPI_ANY_TAG` (integer)
+
+        IN **comm**: communicator (handle)
+
+        OUT **request**: communication request (handle)
+
+.. code-block:: c
+    
+        // buffer msg is received at the calling rank
+        int MPI_Irecv(void *buf, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Request *request);
+
+To complete the nonblocking RECV operation, we use `MPI_WAIT` or `MPI_WAITALL` as we did for the nonblocking SEND operation.
+
+.. image:: ../../figures/NonBlocking_Recv.png
+
+In this diagram, the nonblocking RECV operation may be posted before the matching SEND operation is initiated. 
+Also, its completion does not indicate that the matching SEND operation has completed.
+
+.. admonition:: Example
+    :class: hint
+    
+    For example, in our model problem, each process sends two outgoing messages and receives two incoming messages. 
+    How should we use nonblocking SEND and RECV operations to complete the communication?
+    There are a few ways to do this. The most straightforward way is to use `MPI_Waitall` to wait for all nonblocking operations to complete.
+    However, this introduces unnecessary waiting time for the process. Remember that the Jacobi solver is local, meaning the top and bottom rows are updated independently of each other.
+    Therefore, we can use `MPI_WAITALL` to wait for the top row communication and the bottom row communication to complete separately.
+    Moreover, we can use `MPI_TESTALL` to check if the top row communication and the bottom row communication are completed. If they are, we can continue with the computation.
+    This way, we can **overlap communication and computation**, reducing the total execution time of the program.
+
+.. image:: ../../figures/Submesh_int.png
+
+
