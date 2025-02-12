@@ -23,3 +23,8 @@ Topic 2: Point-to-point Communication
 .. toctree::
     tutorial/Topic_two/p2p_comm
 
+Topic 3: Collective Communication
+
+.. toctree::
+    tutorial/Topic_three/collective_comm
+
