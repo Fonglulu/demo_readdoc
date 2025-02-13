@@ -40,6 +40,7 @@ In this diagram, each row of the box represents data location in one process. In
         IN **datatype**: data type of elements in send buffer (handle)
         IN **root**: rank of broadcast root (integer)
         IN **comm**: communicator (handle)
+    
     C Binding:
 
     .. code-block:: c
@@ -72,12 +73,14 @@ In the diagram above, a global reduce operation performs across all members of t
         IN **op**: operation (handle)
         IN **root**: rank of root process (integer)
         IN **comm**: communicator (handle)
+   
+   
     C Binding:
 
-.. code-block:: c
+    .. code-block:: c
 
-    // combine the data from all processes, operate on them by a predefined operator, and return the result to one process
-    int MPI_Reduce(void *sendbuf, void *recvbuf, int count, MPI_Datatype datatype, MPI_Op op, int root, MPI_Comm comm)
+        // combine the data from all processes, operate on them by a predefined operator, and return the result to one process
+        int MPI_Reduce(void *sendbuf, void *recvbuf, int count, MPI_Datatype datatype, MPI_Op op, int root, MPI_Comm comm)
 
 In our example, we use `MPI_REDUCE` to calculate the global l2 residual.
 
