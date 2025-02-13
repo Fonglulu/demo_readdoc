@@ -44,3 +44,12 @@ In this diagram, each row of the box represents data location in one process. In
 
         // broadcast a message from the process with rank "root" to all other processes of the communicator
         int MPI_Bcast(void *buffer, int count, MPI_Datatype datatype, int root, MPI_Comm comm)
+
+
+**MPI_REDUCE**
+MPI_REDUCE combines the data from all processes, operate on them by a predefined operator, and returns the result to one process. The figure below shows the operation of MPI_REDUCE.
+
+
+.. image:: ../../figures/Reduce.png
+
+In the diagram above, a gloabel reduce operation performs across all members of the communication group, and returns the result of the reduction to one member of the group.
