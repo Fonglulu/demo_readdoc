@@ -29,3 +29,10 @@ Topic 3: Collective Communication
 .. toctree::
     tutorial/Topic_three/collective_comm
 
+
+Topic 4: One-sided Communication
+=================================
+
+.. toctree::
+    tutorial/Topic_four/one_sided_comm
+
